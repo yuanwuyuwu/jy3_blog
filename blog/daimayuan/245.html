@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link href="../main.css" rel="stylesheet" type="text/css">
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+    <link rel="shortcut icon" href="./lty.jpg">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
+    <link href="../atom-one-dark.css"  rel="stylesheet"  type="text/css">
+    <title>GTF - Great Teacher Friedman</title>
+  </head>
+  <body>
+    <script>
+      if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+      {
+          document.body.classList.add('mobile');
+      }
+      hljs.initHighlightingOnLoad();
+      hljs.initLineNumbersOnLoad();
+    </script> 
+    <div class="inner">
+      <h2>代码源oj #245. 数位和</h2>
+      <h3 id="BBBBBB">组合数计算</h3>
+
+      <p>代码</p>
+
+      <!-- <p><img src="http://www.yinwang.org/images/the-little-schemer.jpeg" alt="The Little Schemer" />
+      <img src="http://www.yinwang.org/images/the-little-lisper.jpeg" alt="The Little Lisper" /></p> -->
+      <pre class="highlight"><code>debug=False
+  def cal(x):
+      res={}
+      for i in range(10):
+          res[i]=0
+      for i in range(0,x+1):
+          for j in str(i):
+              # if '0' in str(i)[-1] :
+              #     print("0 in ",i)
+              res[int(j)]+=1
+      if debug :
+          print('cal=')
+          print(res)
+      return res
+
+  def cal_in_idx(x,idx):
+      res=0
+      for i in range(0,x+1):
+          if len(str(i))>=idx and '0' in str(i)[-idx] :
+              print("0 in ",i)
+              res+=1
+              
+      print('cal_in_idx=',res)
+
+  def vector_add_vector(list1,list2):
+      res={}
+      for i in range(10):
+          res[i]=list1[i]+list2[i]
+      return res
+  def vector_sub_vector(list1,list2):
+      res={}
+      for i in range(10):
+          res[i]=list1[i]-list2[i]
+      return res
+  def vector_mul_num(list1,num):
+      res={}
+      for i in range(10):
+          res[i]=list1[i]*num
+      return res
+  def cal_combination(l):# 0-9 0-99 0-999
+      res_list=[]
+      res={}
+      for i in range(10):
+          res[i]=0
+      res_list.append(res)
+      for len_val in range(1,l+1):
+          res={}
+          for num in range(10):
+              # print("cal_combination",res)
+              res[num]=0
+              for i in range(len_val):
+                  if i==0 :
+                      if num==0 :
+                          if len_val==1:
+                              res[num]+=1
+                          else:
+                              continue
+                      else:
+                          res[num]+=(10**(len_val-1))
+                  else:
+                      res[num]+=9*(10**(len_val-2))
+          res=vector_add_vector(res,res_list[-1])
+          res_list.append(res)
+      if debug == True :
+          print("cal_combination")
+          for i in res_list:
+              print(i)
+      return res_list
+
+  def cal_sum(x):
+      x=str(x)
+      l=len(x)
+      combination_list=cal_combination(l)
+      # print(combination_list)
+      res=combination_list[l-1]
+      # print('res=',res)
+      for i in range(l):
+          num=int(x[i])
+          idx=l-i
+          if idx==l:
+              res=vector_add_vector(res,vector_mul_num(combination_list[idx-1],num-1))
+              # print('here res=',res[0])
+              start=0
+              if idx!=1 :
+                  start=1
+              else:
+                  start=0
+              # print('here res=',res[0])
+              for j in range(start,num) :
+                  res[j]+=10**(idx-1)
+              # print('here res=',res[0])
+              val_t=0
+              for t in x[i+1:l]:
+                  val_t*=10
+                  val_t+=int(t)
+              res[num]+=val_t+1
+              # print('here res=',res[0])
+              val_t=0
+              for t in range(1,idx-1):
+                  val_t+=(10**t)
+              res[0]+=val_t*(num-1)
+              # print('here res=',res[0])
+          else:
+              # print("i need the value  of i =",i)
+              # print("here idx = ",idx)
+              # print('here=',combination_list[idx-1])
+              res=vector_add_vector(res,vector_mul_num(combination_list[idx-1],num))
+              # print('here res 1=',res[0])
+              for j in range(0,num) :
+                  res[j]+=10**(idx-1)
+              # print('here res 2=',res[0])
+              val_t=0
+              for t in x[i+1:l]:
+                  val_t*=10
+                  val_t+=int(t)
+              res[num]+=val_t+1
+              # print('here res 3=',res[0])
+              val_t=0
+              for t in range(1,idx-1):
+                  val_t+=(10**t)
+              # print('val_t',val_t)
+              res[0]+=val_t*(max(0,num))
+              # print('here res 4=',res[0])
+      if debug == True :
+          print(res)
+      return res
+  # cal_combination(3)
+  l,r=map(int,input().split())
+  for k,v in vector_sub_vector(cal_sum(r),cal_sum(l-1)).items():
+      print(v,end=' ')
+  if debug == True :
+      print()
+      for k,v in vector_sub_vector(cal(r),cal(l-1)).items():
+          print(v,end=' ')
+  # if debug == True :
+  #     cal_in_idx(r,1)
+  #     cal_in_idx(r,2)
+  #     cal_in_idx(r,3)
+  #     cal_in_idx(r,4)
+  '''
+  6 2323
+  '''
+      </code></pre>
+    </div>
+  </body>
+</html>
