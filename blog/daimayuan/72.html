@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link href="../main.css" rel="stylesheet" type="text/css">
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+    <link rel="shortcut icon" href="../lty.jpg">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
+    <link href="../atom-one-dark.css"  rel="stylesheet"  type="text/css">
+    <title>GTF - Great Teacher Friedman</title>
+  </head>
+  <body>
+    <script>
+      if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+      {
+          document.body.classList.add('mobile');
+      }
+      hljs.initHighlightingOnLoad();
+      hljs.initLineNumbersOnLoad();
+    </script> 
+    <div class="inner">
+      <h2>【代码源】72.二分答案3 解法</h2>
+      <h3 id="题目">题目</h3>
+      <a href="http://oj.daimayuan.top/problem/72">here</a>
+      <h3 id="视频">视频</h3>
+      <iframe src="//player.bilibili.com/player.html?aid=561888175&bvid=BV18e4y1e7z1&cid=871922285&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="600" height="400"> </iframe>
+      <h3 id="代码">代码</h3>
+
+      <!-- <p><img src="http://www.yinwang.org/images/the-little-schemer.jpeg" alt="The Little Schemer" />
+      <img src="http://www.yinwang.org/images/the-little-lisper.jpeg" alt="The Little Lisper" /></p> -->
+      <pre class="highlight"><code>#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int maxn=1e5+10;
+int arr[maxn];
+int n,k;
+int is_right(ll mid,ll &min_t){
+    min_t=1e13+10;
+    ll sum=0;
+    int kt=0;
+    bool not_last=true;
+    for(int i=0;i<n;i++){
+        if(sum+arr[i]<mid){
+            sum+=arr[i];
+        }
+        else{
+            sum+=arr[i];
+            // min_t=min(min_t,sum);
+            if(i==n-1){
+                not_last=false;
+            }
+            sum=0;
+            kt++;
+        }
+    }
+    if(not_last){
+        if(sum>=mid){
+            kt++;
+        }
+        // min_t=min(min_t,sum);
+    }
+    if(kt>=k){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+int main(){
+    scanf("%d%d",&n,&k);
+    for(int i=0;i<n;i++){
+        scanf("%d",&arr[i]);
+    }
+    ll right=1e13+1;
+    ll left=1;
+    // ll ans=0;
+    while(left + 1 < right){
+        ll mid=(left+right)/2;
+        ll min_t;
+        // printf("==>%lld %lld %lld\n",left,right,mid);
+        if(is_right(mid,min_t)){
+            // printf("min_t==>%lld\n",min_t);
+            // if(min_t>ans){
+            //     ans=max(ans,min_t);
+            // }
+            left=mid;
+        }
+        else{
+            right=mid;
+        }
+    }
+    printf("%lld\n",left);
+    return 0;
+}
+/*
+5 3
+1 4 2 6 8
+
+5 3
+100 100 50 50 1
+
+5 2
+1 50 50 100 100
+
+*/
+      </code></pre>
+    </div>
+  </body>
+</html>
