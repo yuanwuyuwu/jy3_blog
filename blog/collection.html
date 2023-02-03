@@ -1,32 +1,73 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <link href="./main.css" rel="stylesheet" type="text/css">
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-    <link rel="shortcut icon" href="./lty.jpg">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
-    <link href="../atom-one-dark.css"  rel="stylesheet"  type="text/css">
-    <title>收藏夹</title>
-  </head>
-  <body>
-    <script>
-      if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-      {
-          document.body.classList.add('mobile');
-      }
-      hljs.initHighlightingOnLoad();
-      hljs.initLineNumbersOnLoad();
-    </script> 
-    <div class="inner">
 
-      <h2>收藏夹</h2>
-      <h3><a href="https://blog.csdn.net/weixin_34130269/article/details/89616461">github跳转</a></h3>
-      <h3><a href="https://learnku.com/docs/build-web-application-with-golang">go web</a></h3>
-      <h3><a href="https://www.liwenzhou.com/posts/Go/15_socket/">go socket</a></h3>
-    </div>
-  </body>
-</html>
+
+<html>
+    <head>
+  
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+      <link href="/blog/home.css" rel="stylesheet" type="text/css">
+      <!-- <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed"> -->
+      <link rel="shortcut icon" href="/blog/lty.jpg">
+  
+      <title>收藏夹</title>
+
+    </head>
+    
+    <body>
+       <script>
+          if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+          {
+              document.body.classList.add('mobile');
+          }
+       </script>
+  
+      <nav class="navbar navbar-default navbar-fixed-top" style="opacity: .9" role="navigation">
+      <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">jy3's blog</a>
+          </div>
+  
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/home.html">主页</a></li>
+                  <li class="active"><a href="#">收藏夹</a></li>
+                  <li><a href="https://space.bilibili.com/37620231">哔哩哔哩</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  
+  <div class="outer">
+      <ul class="list-group">
+            <li class="list-group-item title">
+                <a href="https://blog.csdn.net/weixin_34130269/article/details/89616461">github跳转</a>
+            </li>
+
+            <li class="list-group-item title">
+                <a href="https://learnku.com/docs/build-web-application-with-golang">go web</a>
+            </li>
+
+            <li class="list-group-item title">
+              <a href="https://www.liwenzhou.com/posts/Go/15_socket/">go socket</a>
+          </li> 
+          
+      </ul>
+  </div>
+  
+  
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+     
+    </body>
+  
+  </html>
+  
